@@ -56,7 +56,7 @@
                 <TextBox x:Name="TBNotes" Text="записка" TextWrapping="Wrap" VerticalAlignment="Top" Margin="15,160,15,0" Foreground="Black" FontWeight="Bold" FontSize="16" Height="150"/>
                 <Line Stroke="White" X1="250" StrokeThickness="2" Margin="15,320,0,0"/>
 
-                <Border x:Name="BDone" Style="{DynamicResource AnimBlockOpacity}" Background="#FFE5FFE3" Margin="15,340,15,0" VerticalAlignment="Top" Height="30">
+                <Border x:Name="BDone" Style="{DynamicResource AnimBlockOpacity}" Background="#FFE5FFE3" Margin="15,340,15,0" VerticalAlignment="Top" Height="30" MouseDown="BDone_MouseDown">
                     <TextBlock Foreground="#FF749094" FontWeight="Bold" FontSize="16" Text="Выполнить" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
                 </Border>
                 <Border x:Name="BVisitAppoiment" Style="{DynamicResource AnimBlockOpacity}" Background="White" Margin="15,375,15,0" VerticalAlignment="Top" Height="30">

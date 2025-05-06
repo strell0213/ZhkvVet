@@ -61,5 +61,14 @@ namespace VetZhukova
         {
             this.DialogResult = true;
         }
+
+        private void BDone_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if(MessageBox.Show("Использовались ли расходные материалы?", GlobalSettings.NameApplication, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                ConsumableWindow consumableWindow = new ConsumableWindow();
+                consumableWindow.Show();
+            }
+        }
     }
 }
