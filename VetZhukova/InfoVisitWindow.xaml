@@ -1,0 +1,77 @@
+﻿<Window x:Class="VetZhukova.InfoVisitWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VetZhukova"
+        mc:Ignorable="d"
+        Title="InfoVisitWindow" Height="610" Width="400">
+    <Window.Resources>
+        <Style x:Key="AnimBlockOpacity" TargetType="Border">
+            <Setter Property="CornerRadius" Value="15"/>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard Storyboard.TargetProperty="(TextBlock.Opacity)">
+                                <DoubleAnimation To="0.5" Duration="0:0:0:0.2"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard Storyboard.TargetProperty="(TextBlock.Opacity)">
+                                <DoubleAnimation To="1" Duration="0:0:0:0.2"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Image/окно регистрации фон.jpg"/>
+        </Grid.Background>
+
+        <Border Background="#FF748F96" Margin="30,30,30,30">
+            <Border.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="15"></Setter>
+                </Style>
+            </Border.Resources>
+            <Grid>
+                <TextBlock x:Name="LTitle" Text="Оглавление" FontSize="20" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Top" Margin="0,5,0,0" Foreground="White"/>
+
+                <TextBlock  x:Name="LPatient" Text="Питомец" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,40,0,0" Foreground="White" FontWeight="Bold" FontSize="16"/>
+                <Line Stroke="White" X1="200" StrokeThickness="2" Margin="15,65,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <TextBlock x:Name="LOwner" Text="Владелец" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,70,0,0" Foreground="White" FontWeight="Bold" FontSize="16"/>
+                <Line Stroke="White" X1="200" StrokeThickness="2" Margin="15,95,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <TextBlock x:Name="LEmployee" Text="Принимающий" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,100,0,0" Foreground="White" FontWeight="Bold" FontSize="16"/>
+                <Line Stroke="White" X1="200" StrokeThickness="2" Margin="15,125,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <TextBlock x:Name="LService" Text="Услуга" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,130,0,0" Foreground="White" FontWeight="Bold" FontSize="16"/>
+                <Line Stroke="White" X1="200" StrokeThickness="2" Margin="15,155,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <TextBox x:Name="TBNotes" Text="записка" TextWrapping="Wrap" VerticalAlignment="Top" Margin="15,160,15,0" Foreground="Black" FontWeight="Bold" FontSize="16" Height="150"/>
+                <Line Stroke="White" X1="250" StrokeThickness="2" Margin="15,320,0,0"/>
+
+                <Border x:Name="BDone" Style="{DynamicResource AnimBlockOpacity}" Background="#FFE5FFE3" Margin="15,340,15,0" VerticalAlignment="Top" Height="30">
+                    <TextBlock Foreground="#FF749094" FontWeight="Bold" FontSize="16" Text="Выполнить" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                </Border>
+                <Border x:Name="BVisitAppoiment" Style="{DynamicResource AnimBlockOpacity}" Background="White" Margin="15,375,15,0" VerticalAlignment="Top" Height="30">
+                    <TextBlock Foreground="#FF749094" FontWeight="Bold" FontSize="16" Text="Направить" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                </Border>
+                <Border x:Name="BAddMedication" Style="{DynamicResource AnimBlockOpacity}" Background="White" Margin="15,410,15,0"  VerticalAlignment="Top" Height="30">
+                    <TextBlock Foreground="#FF749094" FontWeight="Bold" FontSize="16" Text="Выписать лекарства" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                </Border>
+
+                <Border x:Name="BBack" Style="{DynamicResource AnimBlockOpacity}" Background="White" Margin="15,470,15,0" MouseDown="BBack_MouseDown" VerticalAlignment="Top" Height="30">
+                    <TextBlock Foreground="#FFE46565" FontWeight="Bold" FontSize="16" Text="Назад" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                </Border>
+
+            </Grid>
+        </Border>
+
+    </Grid>
+</Window>

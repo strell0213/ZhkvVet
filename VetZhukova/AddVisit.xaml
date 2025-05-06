@@ -1,0 +1,112 @@
+﻿<Window x:Class="VetZhukova.AddVisit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VetZhukova"
+        mc:Ignorable="d"
+        Title="AddVisit" Height="600" Width="800" FontSize="16" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style x:Key="AnimBlockOpacity">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard Storyboard.TargetProperty="(TextBlock.Opacity)">
+                                <DoubleAnimation To="0.5" Duration="0:0:0:0.2"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard Storyboard.TargetProperty="(TextBlock.Opacity)">
+                                <DoubleAnimation To="1" Duration="0:0:0:0.2"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="1.9*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <GroupBox Header="Питомец пациента">
+                        <Grid>
+                            <CheckBox x:Name="CBHavePatient" Margin="5,10,0,0" Content="Указать существующего питомца" IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Top" Click="CBHavePatient_Click"></CheckBox>
+                            <Grid x:Name="GAddPatient" Visibility="Visible">
+                                <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,30,0,0" Content="Наименование"></Label>
+                                <TextBox x:Name="TBNamePatient" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,60,0,0" Width="200" Height="24"></TextBox>
+                                <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,90,0,0" Content="Порода"></Label>
+                                <TextBox x:Name="TBBreed" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,120,0,0" Width="200" Height="24"></TextBox>
+                            </Grid>
+                            <Grid x:Name="GChoosePatient" Visibility="Hidden">
+                                <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,30,0,0" Content="Питомец"></Label>
+                                <ComboBox x:Name="CBChoosePatient" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,65,0,0" Width="250"></ComboBox>
+                            </Grid>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <GroupBox Header="Пациент">
+                        <Grid>
+                            <CheckBox x:Name="CBHaveOwner" Margin="5,10,0,0" Content="Указать существующего пациента" HorizontalAlignment="Left" VerticalAlignment="Top" Click="CBHaveOwner_Click"></CheckBox>
+                            <Grid x:Name="GAddOwner" Visibility="Visible">
+                                <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,30,0,0" Content="ФИО"></Label>
+                                <TextBox x:Name="TBFIOOwner" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,60,0,0" Width="200" Height="24"></TextBox>
+                                <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,90,0,0" Content="Номер телефона"></Label>
+                                <TextBox x:Name="TBPhone" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,120,0,0" Width="200" Height="24"></TextBox>
+                                <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="215,30,0,0" Content="Логин"></Label>
+                                <TextBox x:Name="TBLogin" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="215,60,0,0" Width="200" Height="24"></TextBox>
+                                <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="215,90,0,0" Content="Номер телефона"></Label>
+                                <PasswordBox x:Name="PBPass" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="215,120,0,0" Width="200" Height="24"></PasswordBox>
+                            </Grid>
+                            <Grid x:Name="GChooseOwner" Visibility="Hidden">
+                                <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,30,0,0" Content="Пациент"></Label>
+                                <ComboBox x:Name="CBChooseOwner" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,65,0,0" Width="250"></ComboBox>
+                            </Grid>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="1">
+                <GroupBox Header="Запись">
+                    <Grid>
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,10,0,0" Content="Дата визита"></Label>
+                        <DatePicker x:Name="DPDateVisit" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,40,0,0" Width="300"></DatePicker>
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,80,0,0" Content="Сотрудник"></Label>
+                        <ComboBox x:Name="CBEmployee" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,115,0,0" Width="300"></ComboBox>
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,155,0,0" Content="Пометка"></Label>
+                        <TextBox x:Name="TBNotes" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,190,0,0" Width="500" Height="100" TextWrapping="Wrap"></TextBox>
+                        <GroupBox HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,15,0" Header="Услуга" Width="300" Height="70">
+                            <ComboBox x:Name="CBService" Margin="5,5,5,5"></ComboBox>
+                        </GroupBox>
+                    </Grid>
+                </GroupBox>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Border x:Name="BOk" Background="#FF7A5FFF" Style="{DynamicResource AnimBlockOpacity}" HorizontalAlignment="Left" Margin="15,5,0,5" Width="120" MouseDown="BOk_MouseDown">
+                <TextBlock Foreground="White" FontWeight="Bold" FontSize="16" Text="Запись" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
+            </Border>
+            <Border x:Name="BCancel" Background="#FF7A5FFF" Style="{DynamicResource AnimBlockOpacity}" HorizontalAlignment="Right" Margin="0,5,15,5" Width="120" MouseDown="BCancel_MouseDown">
+                <TextBlock Foreground="White" FontWeight="Bold" FontSize="16" Text="Отмена" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
