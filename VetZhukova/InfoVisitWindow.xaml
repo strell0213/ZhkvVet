@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VetZhukova"
         mc:Ignorable="d"
-        Title="InfoVisitWindow" Height="610" Width="400">
+        Title="Детали записи" Height="610" Width="400" Icon="/Image/pethealthicon.ico" WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <Style x:Key="AnimBlockOpacity" TargetType="Border">
             <Setter Property="CornerRadius" Value="15"/>

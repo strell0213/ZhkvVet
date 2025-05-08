@@ -98,5 +98,13 @@ namespace VetZhukova
 
             return true;
         }
+
+        public void DoneVisit(int id)
+        {
+            var visit = App.AC.Visits.Where(c => c.VisitID == id).FirstOrDefault();
+            visit.Status = 2;
+
+            App.AC.SaveChanges();
+        }
     }
 }

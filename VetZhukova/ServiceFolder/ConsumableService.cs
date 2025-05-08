@@ -7,17 +7,19 @@ using VetZhukova.DB;
 
 namespace VetZhukova.ServiceFolder
 {
-    class SetConsumable : Consumable
+    class SetConsumable
     {
+        public int ConsumableID { get; set; }
         public int count { get; set; }
+        public int quantity { get; set; }
+        public string Name { get; set; }
 
-        SetConsumable(int ID,string Name, string Unit, string LastUpdated, int count)
+        SetConsumable(int ID,string Name, int count, int Quantity)
         {
             this.ConsumableID = ID;
-            this.name = Name;
-            this.unit = Unit;
-            this.lastUpdated = lastUpdated;
+            this.Name = Name;
             this.count = count;
+            this.quantity = Quantity;
         }
 
         public SetConsumable()
@@ -34,7 +36,7 @@ namespace VetZhukova.ServiceFolder
             return consumbales;
         }
 
-        public List<SetConsumable> GetSetConsumables(string search="")
+        public List<SetConsumable> GetSetConsumables()
         {
             List<SetConsumable> setConsumables = new List<SetConsumable>();
 
@@ -44,16 +46,24 @@ namespace VetZhukova.ServiceFolder
                 SetConsumable setConsumable = new SetConsumable()
                 {
                     ConsumableID = consumbale.ConsumableID,
-                    name = consumbale.name,
-                    unit = consumbale.unit,
-                    lastUpdated = consumbale.lastUpdated,
+                    Name = consumbale.name,
+                    quantity = consumbale.Quantity,
                     count = 0,
                 };
                 setConsumables.Add(setConsumable);
             }
 
             return setConsumables;
+        }
 
+        public void UpdateConsumablesDB(List<SetConsumable> setConsumables)
+        {
+            foreach(var sc in setConsumables)
+            {
+                var consumbale = App.AC.Consumables.Where(c => c.ConsumableID == sc.ConsumableID).FirstOrDefault();
+                consumbale.Quantity = consumbale.Quantity - sc.count;
+            }
+            App.AC.SaveChanges();
         }
     }
 }

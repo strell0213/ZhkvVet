@@ -17,9 +17,10 @@ namespace VetZhukova.DB
         public string lastUpdated { get { return LastUpdated; } set { LastUpdated = value; } }
 
         public Consumable() { }
-        public Consumable(string Name, string Unit, string LastUpdated)
+        public Consumable(string Name, int Quantity, string Unit, string LastUpdated)
         {
             this.Name = Name;
+            this.Quantity = Quantity;
             this.Unit = Unit;
             this.LastUpdated = LastUpdated;
         }

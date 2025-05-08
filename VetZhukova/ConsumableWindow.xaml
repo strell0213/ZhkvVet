@@ -45,7 +45,7 @@
                 <SolidColorBrush Color="White" Opacity="0.85"/>
             </Grid.Background>
             <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="13,0,0,0" Content="Поиск" FontSize="15"></Label>
-            <TextBox x:Name="TBSearch" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,27,0,0" Width="250" Height="25"></TextBox>
+            <TextBox x:Name="TBSearch" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,27,0,0" Width="250" Height="25" TextChanged="TBSearch_TextChanged"></TextBox>
         </Grid>
         <Grid x:Name="GMain" Grid.Row="1">
             <ItemsControl x:Name="LVConsumbale" d:ItemsSource="{d:SampleData ItemCount=3}" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" HorizontalContentAlignment="Stretch" VirtualizingPanel.ScrollUnit="Pixel">
@@ -67,16 +67,16 @@
                                         <ColumnDefinition></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
                                     <Grid Grid.Column="0">
-                                        <TextBlock Text="{Binding name}" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontWeight="Bold" FontSize="24" Margin="15,5,0,5"></TextBlock>
+                                        <TextBlock Text="{Binding Name}" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontWeight="Bold" FontSize="24" Margin="15,5,0,5"></TextBlock>
                                     </Grid>
                                     <Grid Grid.Column="1">
-                                        <Border Background="White" Style="{DynamicResource AnimBlockOpacity}" VerticalAlignment="Stretch" Height="30" Margin="15,0,15,0" HorizontalAlignment="Left" Width="30">
+                                        <Border Background="White" Style="{DynamicResource AnimBlockOpacity}" VerticalAlignment="Stretch" Height="30" Margin="15,0,15,0" HorizontalAlignment="Left" Width="30" MouseDown="Border_MouseDown_1">
                                             <TextBlock Text="-" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF748F96" FontWeight="Bold" FontSize="20" Margin="0,0,0,4"></TextBlock>
                                         </Border>
-                                        <Border Background="White" Style="{DynamicResource AnimBlockOpacity}" VerticalAlignment="Stretch" Height="30" Margin="50,0,15,0" HorizontalAlignment="Left" Width="30">
+                                        <Border Background="White" Style="{DynamicResource AnimBlockOpacity}" VerticalAlignment="Stretch" Height="30" Margin="50,0,15,0" HorizontalAlignment="Left" Width="30" MouseDown="Border_MouseDown">
                                             <TextBlock Text="+" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF748F96" FontWeight="Bold" FontSize="20" Margin="0,0,0,4"></TextBlock>
                                         </Border>
-                                        <TextBlock Text="{Binding count}" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontWeight="Bold" FontSize="24" Margin="90,3,0,0"></TextBlock>
+                                        <TextBlock x:Name="TBCount" Text="{Binding count}" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontWeight="Bold" FontSize="24" Margin="90,3,0,0"></TextBlock>
                                     </Grid>
                                 </Grid>
                             </Border>
@@ -108,10 +108,10 @@
             <Grid.Background>
                 <SolidColorBrush Color="White" Opacity="0.85"/>
             </Grid.Background>
-            <Border x:Name="BDone" Style="{DynamicResource AnimBlockOpacity}" Background="#FF424242" Margin="15,3,0,0" VerticalAlignment="Top" Height="30" HorizontalAlignment="Left" Width="100">
+            <Border x:Name="BDone" Style="{DynamicResource AnimBlockOpacity}" Background="#FF424242" Margin="15,3,0,0" VerticalAlignment="Top" Height="30" HorizontalAlignment="Left" Width="100" MouseDown="BDone_MouseDown">
                 <TextBlock Foreground="White" FontWeight="Bold" FontSize="16" Text="Готово" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
             </Border>
-            <Border x:Name="BCancel" Style="{DynamicResource AnimBlockOpacity}" Background="#FF424242" Margin="0,3,15,0" VerticalAlignment="Top" Height="30" HorizontalAlignment="Right" Width="100">
+            <Border x:Name="BCancel" Style="{DynamicResource AnimBlockOpacity}" Background="#FF424242" Margin="0,3,15,0" VerticalAlignment="Top" Height="30" HorizontalAlignment="Right" Width="100" MouseDown="BCancel_MouseDown">
                 <TextBlock Foreground="#FFFF7171" FontWeight="Bold" FontSize="16" Text="Отмена" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
             </Border>
         </Grid>
