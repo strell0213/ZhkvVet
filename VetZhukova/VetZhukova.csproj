@@ -74,6 +74,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddPatientWindow.xaml.cs">
+      <DependentUpon>AddPatientWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ConsumableWindow.xaml.cs">
       <DependentUpon>ConsumableWindow.xaml</DependentUpon>
     </Compile>
@@ -88,6 +91,10 @@
     <Compile Include="ServiceFolder\ServiceService.cs" />
     <Compile Include="ServiceFolder\VisitService.cs" />
     <Page Include="AddlConsumableWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddPatientWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

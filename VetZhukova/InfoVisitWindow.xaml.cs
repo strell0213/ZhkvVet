@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using VetZhukova.DB;
 using VetZhukova.ServiceFolder;
 
 namespace VetZhukova
@@ -27,6 +28,11 @@ namespace VetZhukova
         private ServiceService _serviceService;
 
         public int idVisit;
+        private Visit _visit;
+        private Employee _employee;
+        private Owner _owner;
+        private Patient _patient;
+        private Service _service;
         public InfoVisitWindow()
         {
             InitializeComponent();
@@ -39,22 +45,22 @@ namespace VetZhukova
 
         public void GetInfo()
         {
-            var visit = _visitService.GetVisitByID(idVisit);
-            if (visit == null) return;
+            _visit = _visitService.GetVisitByID(idVisit);
+            if (_visit == null) return;
 
-            LTitle.Text = $"Запись №{visit.VisitID} - {visit.visitDate}";
+            LTitle.Text = $"Запись №{_visit.VisitID} - {_visit.visitDate}";
 
-            var employee = _employeeService.GetEmployeeByID(visit.EmployeeID);
-            var patient = _patientService.GetPatientByID(visit.PatientID);
-            var owner = _ownerService.GetOwnerByID(patient.OwnerID);
-            var service = _serviceService.GetServiceByID(visit.ServiceID);
+            _employee = _employeeService.GetEmployeeByID(_visit.EmployeeID);
+            _patient = _patientService.GetPatientByID(_visit.PatientID);
+            _owner = _ownerService.GetOwnerByID(_patient.OwnerID);
+            _service = _serviceService.GetServiceByID(_visit.ServiceID);
 
-            LPatient.Text = patient.name;
-            LOwner.Text = owner.fio;
-            LService.Text = service.serviceName;
-            LEmployee.Text = employee.fullName;
+            LPatient.Text = _patient.name;
+            LOwner.Text = _owner.fio;
+            LService.Text = _service.serviceName;
+            LEmployee.Text = _employee.fullName;
 
-            TBNotes.Text = visit.notes;
+            TBNotes.Text = _visit.notes;
         }
 
         private void BBack_MouseDown(object sender, MouseButtonEventArgs e)
@@ -64,10 +70,17 @@ namespace VetZhukova
 
         private void BDone_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if(MessageBox.Show("Использовались ли расходные материалы?", GlobalSettings.NameApplication, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            Done();
+        }
+
+        public void Done()
+        {
+            if (MessageBox.Show("Вы уверены, что хотите выполнить запись?", GlobalSettings.NameApplication, MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.No) return;
+            
+            if (MessageBox.Show("Использовались ли расходные материалы?", GlobalSettings.NameApplication, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 ConsumableWindow consumableWindow = new ConsumableWindow();
-                if(consumableWindow.ShowDialog() == true)
+                if (consumableWindow.ShowDialog() == true)
                 {
                     _visitService.DoneVisit(idVisit);
                     this.DialogResult = true;
@@ -77,6 +90,19 @@ namespace VetZhukova
             {
                 _visitService.DoneVisit(idVisit);
                 this.DialogResult = true;
+            }
+        }
+
+        private void BVisitAppoiment_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            AddVisit addVisit = new AddVisit();
+            addVisit.SelectOwnerPatientInterface(_patient.PatientID, _owner.OwnerID);
+            if(addVisit.ShowDialog() == true)
+            {
+                if (MessageBox.Show("Завершить запись?", GlobalSettings.NameApplication, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    Done();
+                }
             }
         }
     }

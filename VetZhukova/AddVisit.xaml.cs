@@ -107,6 +107,23 @@ namespace VetZhukova
                 CBEmployee.Items.Add(emp.fullName);
             }
         }
+        public void SelectOwnerPatientInterface(int patientID, int ownerID)
+        {
+            GAddPatient.Visibility = Visibility.Hidden;
+            GChoosePatient.Visibility = Visibility.Visible;
+            CBHavePatient.IsEnabled = false;
+            CBHavePatient.IsChecked = true;
+            CBChoosePatient.SelectedIndex = SelectPatient(patientID, ownerID);
+            CBChoosePatient.IsEnabled = false;
+
+            GAddOwner.Visibility = Visibility.Hidden;
+            GChooseOwner.Visibility = Visibility.Visible;
+            CBChooseOwner.SelectedIndex = SelectOwner(ownerID);
+            CBHaveOwner.IsEnabled = false;
+            CBHaveOwner.IsChecked = true;
+            CBChooseOwner.IsEnabled = false;
+        }
+
         public int AddOwner()
         {
             if (TBFIOOwner.Text.Length == 0 || TBPhone.Text.Length == 0 || TBLogin.Text.Length == 0 || PBPass.Password.Length == 0)
