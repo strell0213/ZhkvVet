@@ -26,6 +26,7 @@ namespace VetZhukova
         private readonly VisitService _visitService;
         private readonly ServiceService _serviceService;
         private readonly ConsumableService _consumableService;
+        private readonly PatientService _patientService;
         int chooseTab=1;       //индекс выбранной вкладки с основной панели
 
         Storyboard storyboardTab1 = new Storyboard();
@@ -41,6 +42,7 @@ namespace VetZhukova
             _visitService = new VisitService();
             _serviceService = new ServiceService();
             _consumableService = new ConsumableService();
+            _patientService = new PatientService();
 
             if (!GlobalSettings.isAuth)
             {
@@ -76,6 +78,11 @@ namespace VetZhukova
         public void UpdateConsumable()
         {
             LVConsumable.ItemsSource = _consumableService.GetConsumables();
+        }
+
+        public void UpdatePatients()
+        {
+            LVPatients.ItemsSource = _patientService.GetAllPatients();
         }
 
         private void GHeaderBlock1_MouseEnter(object sender, MouseEventArgs e)
@@ -353,6 +360,7 @@ namespace VetZhukova
         {
             if (TCBooks.SelectedIndex == 0) UpdateService();
             else if (TCBooks.SelectedIndex == 1) UpdateConsumable();
+            else if (TCBooks.SelectedIndex == 2) UpdatePatients();
         }
 
         private void BWritePatientMain_MouseDown(object sender, MouseButtonEventArgs e)
@@ -376,6 +384,15 @@ namespace VetZhukova
             {
                 UpdateLastVisit();
             }
+        }
+
+        private void BInfoPatient_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var item = (Border)sender;
+            var patient = (Patient)item.DataContext;
+
+            PetWindow petWindow = new PetWindow(patient);
+            petWindow.ShowDialog();
         }
     }
 }

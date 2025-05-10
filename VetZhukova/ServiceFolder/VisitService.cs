@@ -38,7 +38,7 @@ namespace VetZhukova
                     VisitID = vsp.vs.v.VisitID
                 })
                 .ToList()
-                .Select(v => new VisitDTO  // Преобразуем в нужный формат после выполнения запроса
+                .Select(v => new VisitDTO 
                 {
                     VisitDate = v.VisitDate,
                     ServiceName = v.ServiceName,
@@ -73,6 +73,36 @@ namespace VetZhukova
                     EmployeeName = v.EmployeeName
                 })
                 .ToList(); 
+
+            return listVisit;
+        }
+
+        public List<VisitDTO> GetDoneVisitPatient()
+        {
+            var listVisit = App.AC.Visits
+                .AsEnumerable()
+                .Where(v => v.Status == 2)
+                .Join(App.AC.Services, v => v.ServiceID, s => s.ServiceID, (v, s) => new { v, s })
+                .Join(App.AC.Patients, vs => vs.v.PatientID, p => p.PatientID, (vs, p) => new { vs, p })
+                .Join(App.AC.Employees, vsp => vsp.vs.v.EmployeeID, e => e.EmployeeID, (vsp, e) => new
+                {
+                    VisitDate = vsp.vs.v.visitDate,
+                    ServiceName = vsp.vs.s.serviceName,
+                    PatientName = vsp.p.name,
+                    EmployeeName = e.fullName,
+                    VisitID = vsp.vs.v.VisitID
+                })
+                .ToList()
+                .OrderBy(x => DateTime.Parse(x.VisitDate))
+                .Select(v => new VisitDTO
+                {
+                    VisitDate = v.VisitDate,
+                    ServiceName = v.ServiceName,
+                    PatientName = v.PatientName,
+                    EmployeeName = v.EmployeeName,
+                    VisitID = v.VisitID
+                })
+                .ToList();
 
             return listVisit;
         }

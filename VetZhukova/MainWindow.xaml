@@ -7,29 +7,12 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1000" WindowStartupLocation="CenterScreen" Icon="/Image/pethealthicon.ico">
     <Window.Resources>
-        <Style x:Key="AnimBlockOpacity" TargetType="Border">
-            <Setter Property="CornerRadius" Value="25"/>
-            <Style.Triggers>
-                <EventTrigger RoutedEvent="Mouse.MouseEnter">
-                    <EventTrigger.Actions>
-                        <BeginStoryboard>
-                            <Storyboard Storyboard.TargetProperty="(TextBlock.Opacity)">
-                                <DoubleAnimation To="0.5" Duration="0:0:0:0.2"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger.Actions>
-                </EventTrigger>
-                <EventTrigger RoutedEvent="Mouse.MouseLeave">
-                    <EventTrigger.Actions>
-                        <BeginStoryboard>
-                            <Storyboard Storyboard.TargetProperty="(TextBlock.Opacity)">
-                                <DoubleAnimation To="1" Duration="0:0:0:0.2"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger.Actions>
-                </EventTrigger>
-            </Style.Triggers>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/Styles.xaml"/>
+                <ResourceDictionary Source="/Styles/ItemsControlStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Window.Resources>
     <Grid>
         <Grid.Background>
@@ -81,7 +64,7 @@
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
                             <Label HorizontalAlignment="Center" VerticalAlignment="Top" Content="Ближайшие записи" FontSize="36" Foreground="Black" Background="White"/>
-                            <ItemsControl x:Name="LBLastVisit" Margin="15,60,15,0" d:ItemsSource="{d:SampleData ItemCount=3}" HorizontalContentAlignment="Stretch" BorderBrush="#FF749094" Background="White" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" VirtualizingPanel.ScrollUnit="Pixel">
+                            <ItemsControl x:Name="LBLastVisit" Style="{StaticResource FlatItemsControlStyle}" Margin="15,60,15,0" d:ItemsSource="{d:SampleData ItemCount=3}" HorizontalContentAlignment="Stretch" BorderBrush="#FF749094" Background="White" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" VirtualizingPanel.ScrollUnit="Pixel">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <Grid Width="Auto" HorizontalAlignment="Stretch" Margin="0,0,0,10">
@@ -124,25 +107,6 @@
                                         </Grid>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
-                                <ItemsControl.Style>
-                                    <Style TargetType="ItemsControl">
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="{x:Type ItemsControl}">
-                                                    <Border BorderBrush="{TemplateBinding BorderBrush}"
-                                                            BorderThickness="{TemplateBinding BorderThickness}"
-                                                            Background="{TemplateBinding Background}"
-                                                            Padding="{TemplateBinding Padding}"
-                                                            SnapsToDevicePixels="True">
-                                                        <ScrollViewer CanContentScroll="False">
-                                                            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                                                        </ScrollViewer>
-                                                    </Border>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </ItemsControl.Style>
                             </ItemsControl>
                         </Grid>
                         <Grid Grid.Row="1">
@@ -396,7 +360,33 @@
                                 </ItemsControl>
                             </TabItem>
                             <TabItem Header="Питомцы" FontWeight="Bold" FontSize="16">
-
+                                <ItemsControl x:Name="LVPatients" Style="{StaticResource FlatItemsControlStyle}" d:ItemsSource="{d:SampleData ItemCount=3}" HorizontalContentAlignment="Stretch">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Width="Auto" HorizontalAlignment="Stretch" Margin="5,5,5,0">
+                                                <Border Style="{DynamicResource AnimBlockOpacity}">
+                                                    <Border.Background>
+                                                        <SolidColorBrush Color="#FF748F96"/>
+                                                    </Border.Background>
+                                                    <Grid Height="50">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                                                            <ColumnDefinition></ColumnDefinition>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid Grid.Column="0">
+                                                            <TextBlock Text="{Binding name}" Margin="15,10,0,0" FontSize="22" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White"></TextBlock>
+                                                        </Grid>
+                                                        <Grid Grid.Column="1">
+                                                            <Border x:Name="BInfoPatient" Background="White" Style="{DynamicResource AnimBlockOpacity}" HorizontalAlignment="Right" Margin="15,5,15,5" Width="150" MouseDown="BInfoPatient_MouseDown">
+                                                                <TextBlock Foreground="#FF749094" FontWeight="Bold" FontSize="16" Text="Подробнее" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                                                            </Border>
+                                                        </Grid>
+                                                    </Grid>
+                                                </Border>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
                             </TabItem>
                         </TabControl>
                     </Grid>

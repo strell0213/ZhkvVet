@@ -7,29 +7,11 @@
         mc:Ignorable="d"
         Title="Детали записи" Height="610" Width="400" Icon="/Image/pethealthicon.ico" WindowStartupLocation="CenterOwner">
     <Window.Resources>
-        <Style x:Key="AnimBlockOpacity" TargetType="Border">
-            <Setter Property="CornerRadius" Value="15"/>
-            <Style.Triggers>
-                <EventTrigger RoutedEvent="Mouse.MouseEnter">
-                    <EventTrigger.Actions>
-                        <BeginStoryboard>
-                            <Storyboard Storyboard.TargetProperty="(TextBlock.Opacity)">
-                                <DoubleAnimation To="0.5" Duration="0:0:0:0.2"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger.Actions>
-                </EventTrigger>
-                <EventTrigger RoutedEvent="Mouse.MouseLeave">
-                    <EventTrigger.Actions>
-                        <BeginStoryboard>
-                            <Storyboard Storyboard.TargetProperty="(TextBlock.Opacity)">
-                                <DoubleAnimation To="1" Duration="0:0:0:0.2"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger.Actions>
-                </EventTrigger>
-            </Style.Triggers>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Window.Resources>
     <Grid>
         <Grid.Background>
