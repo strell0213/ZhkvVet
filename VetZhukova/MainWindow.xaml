@@ -249,7 +249,7 @@
                         </Grid>
                         <TabControl x:Name="TCBooks" Grid.Column="1" SelectionChanged="TCBooks_SelectionChanged">
                             <TabItem Header="Услуги" FontWeight="Bold" FontSize="16">
-                                <ItemsControl x:Name="LVService" d:ItemsSource="{d:SampleData ItemCount=3}" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" HorizontalContentAlignment="Stretch" VirtualizingPanel.ScrollUnit="Pixel">
+                                <ItemsControl x:Name="LVService" d:ItemsSource="{d:SampleData ItemCount=3}" Style="{StaticResource FlatItemsControlStyle}" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" HorizontalContentAlignment="Stretch" VirtualizingPanel.ScrollUnit="Pixel">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
                                             <Grid Width="Auto" HorizontalAlignment="Stretch" Margin="5,5,5,0">
@@ -279,29 +279,10 @@
                                             </Grid>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
-                                    <ItemsControl.Style>
-                                        <Style TargetType="ItemsControl">
-                                            <Setter Property="Template">
-                                                <Setter.Value>
-                                                    <ControlTemplate TargetType="{x:Type ItemsControl}">
-                                                        <Border BorderBrush="{TemplateBinding BorderBrush}"
-                                                                BorderThickness="{TemplateBinding BorderThickness}"
-                                                                Background="{TemplateBinding Background}"
-                                                                Padding="{TemplateBinding Padding}"
-                                                                SnapsToDevicePixels="True">
-                                                            <ScrollViewer CanContentScroll="False">
-                                                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                                                            </ScrollViewer>
-                                                        </Border>
-                                                    </ControlTemplate>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </Style>
-                                    </ItemsControl.Style>
                                 </ItemsControl>
                             </TabItem>
                             <TabItem Header="Расходные материалы" FontWeight="Bold" FontSize="16">
-                                <ItemsControl x:Name="LVConsumable" d:ItemsSource="{d:SampleData ItemCount=3}" HorizontalContentAlignment="Stretch">
+                                <ItemsControl x:Name="LVConsumable" Style="{StaticResource FlatItemsControlStyle}" d:ItemsSource="{d:SampleData ItemCount=3}" HorizontalContentAlignment="Stretch">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
                                             <Grid Width="Auto" HorizontalAlignment="Stretch" Margin="5,5,5,0">
@@ -338,25 +319,6 @@
                                             </Grid>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
-                                    <ItemsControl.Style>
-                                        <Style TargetType="ItemsControl">
-                                            <Setter Property="Template">
-                                                <Setter.Value>
-                                                    <ControlTemplate TargetType="{x:Type ItemsControl}">
-                                                        <Border BorderBrush="{TemplateBinding BorderBrush}"
-                                                            BorderThickness="{TemplateBinding BorderThickness}"
-                                                            Background="{TemplateBinding Background}"
-                                                            Padding="{TemplateBinding Padding}"
-                                                            SnapsToDevicePixels="True">
-                                                            <ScrollViewer CanContentScroll="False">
-                                                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                                                            </ScrollViewer>
-                                                        </Border>
-                                                    </ControlTemplate>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </Style>
-                                    </ItemsControl.Style>
                                 </ItemsControl>
                             </TabItem>
                             <TabItem Header="Питомцы" FontWeight="Bold" FontSize="16">
