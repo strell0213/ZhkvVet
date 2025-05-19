@@ -353,7 +353,75 @@
                         </TabControl>
                     </Grid>
                 </TabItem>
-                <TabItem Visibility="Hidden"/>
+                <TabItem Visibility="Hidden">
+                    <Grid Margin="50,100,50,100" Background="#FF748F96">
+                        <Grid Margin="3,3,3,3" Background="White">
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition Height="5*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0" Background="#FF748F96">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition Width="2.5*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Column="0">
+                                        <Label Content="Имя:" FontSize="22" Foreground="White" VerticalAlignment="Bottom" Margin="0,0,0,5" HorizontalAlignment="Left"></Label>
+                                        <Label x:Name="LFullName" Content="Нет данных" FontSize="22" Foreground="White" VerticalAlignment="Bottom" Margin="65,0,0,5" HorizontalAlignment="Left" FontWeight="Bold"></Label>
+                                    </Grid>
+                                    <Grid Grid.Column="1">
+                                        <Label Content="Должность:" FontSize="22" Foreground="White" VerticalAlignment="Bottom" Margin="0,0,0,5" HorizontalAlignment="Left"></Label>
+                                        <Label x:Name="LPosition" Content="Нет данных" FontSize="22" Foreground="White" VerticalAlignment="Bottom" Margin="130,0,0,5" HorizontalAlignment="Left" FontWeight="Bold"></Label>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition Width="2.5*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0">
+                                    <Grid Background="#FF748F96" VerticalAlignment="Top" Margin="20,5,10,0" Height="223">
+                                        <Image Margin="5,5,5,5" Source="/Image/окно регистрации фон.jpg" Stretch="UniformToFill">
+                                            
+                                        </Image>
+                                    </Grid>
+                                    <Border x:Name="BSaveEmployee" Grid.Column="1" Style="{DynamicResource AnimBlockOpacity}" Background="#FF749094" MouseDown="BWritePatientMain_MouseDown" VerticalAlignment="Top" Margin="20,240,10,0" Height="30">
+                                        <TextBlock Foreground="White" FontSize="20" Text="Редактировать" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                                    </Border>
+                                </Grid>
+                                <Grid Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition Height="4*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Grid x:Name="grid1" Grid.Row="0">
+                                        <Label HorizontalAlignment="Left" Content="Стаж работы:" FontSize="22" VerticalAlignment="Center"/>
+                                        <Label x:Name="LExpDate" Content="Нет данных" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="150,0,0,0" FontWeight="Bold"></Label>
+                                        <Line Stroke="Black" VerticalAlignment="Bottom" X2="{Binding Width, ElementName=grid1, FallbackValue=634}"/>
+                                    </Grid>
+                                    <Grid x:Name="grid2" Grid.Row="1">
+                                        <Label HorizontalAlignment="Left" Content="Номер телефона:" FontSize="22" VerticalAlignment="Center"/>
+                                        <Label x:Name="LPhone" Content="Нет данных" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="190,0,0,0" FontWeight="Bold"></Label>
+                                        <Line Stroke="Black" VerticalAlignment="Bottom" X2="{Binding Width, ElementName=grid2, FallbackValue=634}"/>
+                                    </Grid>
+                                    <Grid x:Name="grid3" Grid.Row="2">
+                                        <Label HorizontalAlignment="Left" Content="E-Mail:" FontSize="22" VerticalAlignment="Center"/>
+                                        <Label x:Name="LEmail" Content="Нет данных" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="93,0,0,0" FontWeight="Bold"></Label>
+                                        <Line Stroke="Black" VerticalAlignment="Bottom" X2="{Binding Width, ElementName=grid3, FallbackValue=634}"/>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </TabItem>
             </TabControl>
         </Grid>
     </Grid>

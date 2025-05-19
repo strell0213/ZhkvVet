@@ -27,6 +27,7 @@ namespace VetZhukova
         private readonly ServiceService _serviceService;
         private readonly ConsumableService _consumableService;
         private readonly PatientService _patientService;
+        private readonly EmployeeService _employeeService;
         int chooseTab=1;       //индекс выбранной вкладки с основной панели
 
         Storyboard storyboardTab1 = new Storyboard();
@@ -43,6 +44,7 @@ namespace VetZhukova
             _serviceService = new ServiceService();
             _consumableService = new ConsumableService();
             _patientService = new PatientService();
+            _employeeService = new EmployeeService();
 
             if (!GlobalSettings.isAuth)
             {
@@ -83,6 +85,17 @@ namespace VetZhukova
         public void UpdatePatients()
         {
             LVPatients.ItemsSource = _patientService.GetAllPatients();
+        }
+
+        public void GetInfoEmployee()
+        {
+            var employee = _employeeService.GetEmployeeByID(GlobalSettings.IDUser);
+
+            LFullName.Content = employee.fullName;
+            LPosition.Content = employee.position;
+            LExpDate.Content = _employeeService.GetStazhWork(employee);
+            LPhone.Content = employee.phone;
+            LEmail.Content = employee.email;
         }
 
         private void GHeaderBlock1_MouseEnter(object sender, MouseEventArgs e)
@@ -270,6 +283,8 @@ namespace VetZhukova
             TCMain.SelectedIndex = 3;
             LineGHeaderBlock4.X1 = GHeaderBlock4.ActualWidth;
             chooseTab = 4;
+
+            GetInfoEmployee();
         }
 
         private void BAddSerAndCons_MouseDown(object sender, MouseButtonEventArgs e)
