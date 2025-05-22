@@ -184,7 +184,7 @@
                                                         <TextBlock Text="{Binding ServiceName}" Margin="15,75,0,5" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White"></TextBlock>
                                                     </Grid>
                                                     <Grid Grid.Column="1">
-                                                        <Border Background="White" Style="{DynamicResource AnimBlockOpacity}" VerticalAlignment="Center" Height="40" Margin="0,0,15,0">
+                                                        <Border Background="White" Style="{DynamicResource AnimBlockOpacity}" VerticalAlignment="Center" Height="40" Margin="0,0,15,0" MouseDown="BInfoLateVizit_MouseDown">
                                                             <TextBlock Text="Подробнее" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF748F96" FontWeight="Bold" FontSize="20"></TextBlock>
                                                         </Border>
                                                     </Grid>

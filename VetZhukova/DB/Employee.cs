@@ -9,7 +9,7 @@ namespace VetZhukova.DB
     public class Employee
     {
         public int EmployeeID { get; set; }
-        private string FullName, Position, HireDate, Phone, Email, Login, Password;
+        private string FullName="", Position="", HireDate = "", Phone = "", Email = "", Login = "", Password = "";
 
         public string fullName { get { return FullName; } set { FullName = value; } }
         public string position { get { return Position; } set { Position = value; } }

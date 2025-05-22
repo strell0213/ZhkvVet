@@ -88,7 +88,8 @@
                 <GroupBox Header="Запись">
                     <Grid>
                         <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,10,0,0" Content="Дата визита"></Label>
-                        <DatePicker x:Name="DPDateVisit" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,40,0,0" Width="300"></DatePicker>
+                        <DatePicker x:Name="DPDateVisit" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,40,0,0" Width="300" SelectedDateFormat="Long"></DatePicker>
+                        <TextBox x:Name="TETime" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="320,41,0,0" Height="29.28" Width="70" MaxLength="5" Text="00:00" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" PreviewTextInput="TETime_PreviewTextInput" TextChanged="TETime_TextChanged"></TextBox>
                         <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,80,0,0" Content="Сотрудник"></Label>
                         <ComboBox x:Name="CBEmployee" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,115,0,0" Width="300"></ComboBox>
                         <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,155,0,0" Content="Пометка"></Label>

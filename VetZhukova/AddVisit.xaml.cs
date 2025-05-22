@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -31,6 +32,8 @@ namespace VetZhukova
         List<Employee> employeesList;
         List<Owner> ownerList;
         List<Patient> patientsList;
+
+        private static readonly Regex timeRegex = new Regex(@"^[0-9:]*$");
         public AddVisit()
         {
             InitializeComponent();
@@ -154,7 +157,7 @@ namespace VetZhukova
                 return false;
             }
 
-            return visitService.AddVisit(employeesList[CBEmployee.SelectedIndex].EmployeeID, patientID, servicesList[CBService.SelectedIndex].ServiceID, DPDateVisit.Text, TBNotes.Text);
+            return visitService.AddVisit(employeesList[CBEmployee.SelectedIndex].EmployeeID, patientID, servicesList[CBService.SelectedIndex].ServiceID, DPDateVisit.Text, TBNotes.Text, TETime.Text);
         }
         private void BOk_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -239,6 +242,36 @@ namespace VetZhukova
             {
                 GAddPatient.Visibility = Visibility.Visible;
                 GChoosePatient.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void TETime_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !timeRegex.IsMatch(e.Text);
+        }
+
+        private void TETime_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string text = TETime.Text;
+
+            if (text.Length == 4 && !text.Contains(":"))
+            {
+                TETime.Text = text.Insert(2, ":");
+                TETime.CaretIndex = TETime.Text.Length;
+            }
+
+            if (text.Length == 5)
+            {
+                string[] mas = text.Split(':');
+                string hour = mas[0];
+                string min = mas[1];
+
+
+                if (Convert.ToInt32(hour) > 23) hour = "00";
+                if (Convert.ToInt32(min) > 59) min = "00";
+
+                TETime.Text = $"{hour}:{min}";
+                TETime.CaretIndex = TETime.Text.Length;
             }
         }
     }

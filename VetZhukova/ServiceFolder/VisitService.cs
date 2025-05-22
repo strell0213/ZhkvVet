@@ -62,7 +62,8 @@ namespace VetZhukova
                     VisitDate = vsp.vs.v.visitDate,
                     ServiceName = vsp.vs.s.serviceName,
                     PatientName = vsp.p.name,
-                    EmployeeName = e.fullName
+                    EmployeeName = e.fullName,
+                    VisitID = vsp.vs.v.VisitID
                 })
                 .ToList()
                 .Select(v => new VisitDTO  // Преобразуем в нужный формат после выполнения запроса
@@ -70,7 +71,8 @@ namespace VetZhukova
                     VisitDate = v.VisitDate,
                     ServiceName = v.ServiceName,
                     PatientName = v.PatientName,
-                    EmployeeName = v.EmployeeName
+                    EmployeeName = v.EmployeeName,
+                    VisitID = v.VisitID
                 })
                 .ToList(); 
 
@@ -112,14 +114,15 @@ namespace VetZhukova
             return App.AC.Visits.Where(c => c.VisitID == id).FirstOrDefault();
         }
 
-        public bool AddVisit(int employeeID, int patientID, int serviceID, string date, string notes)
+        public bool AddVisit(int employeeID, int patientID, int serviceID, string date, string notes, string time)
         {
+            string datetime = GenerateDateTime(date, time);
             Visit visit = new Visit()
             {
                 EmployeeID = employeeID,
                 PatientID = patientID,
                 ServiceID = serviceID,
-                visitDate = date,
+                visitDate = datetime,
                 notes = notes,
                 Status = 1
             };
@@ -128,6 +131,19 @@ namespace VetZhukova
 
             return true;
         }
+
+        public string GenerateDateTime(string date, string time)
+        {
+            if (DateTime.TryParse($"{date} {time}", out DateTime result))
+            {
+                return result.ToString("yyyy-MM-dd HH:mm"); // формат для базы
+            }
+            else
+            {
+                return DateTime.Now.ToString("yyyy-MM-dd HH:mm"); // запасной вариант
+            }
+        }
+
 
         public void DoneVisit(int id)
         {
