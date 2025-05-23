@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using VetZhukova.DB;
 using VetZhukova.ServiceFolder;
+using VetZhukova.Word;
 
 namespace VetZhukova
 {
@@ -98,6 +100,7 @@ namespace VetZhukova
                 if (consumableWindow.ShowDialog() == true)
                 {
                     _visitService.DoneVisit(idVisit);
+                    PrintDoneVisit();
                     this.DialogResult = true;
                 }
             }
@@ -106,6 +109,44 @@ namespace VetZhukova
                 _visitService.DoneVisit(idVisit);
                 this.DialogResult = true;
             }
+        }
+
+        public void PrintDoneVisit()
+        {
+            var saveFileDialog = new SaveFileDialog
+            {
+                Title = "Сохранить документ",
+                Filter = "Word документ (*.docx)|*.docx",
+                FileName = $"Visit_{DateTime.Now:yyyyMMdd_HHmm}.docx",
+                DefaultExt = ".docx"
+            };
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                var builder = new WordHelper(saveFileDialog.FileName);
+                builder.CreateVisitDocument(
+                    _patient.name,
+                    _owner.fio,
+                    _employee.fullName,
+                    _service.serviceName,
+                    _visit.notes,
+                    GetFullPrice()
+                );
+
+                MessageBox.Show("Документ успешно сохранён!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                System.Diagnostics.Process.Start("explorer", saveFileDialog.FileName);
+            }
+        }
+
+        public string GetFullPrice()
+        {
+            string fullPriceText = "";
+            double fullPrice = (double)_service.Price * 0.15;
+
+            fullPriceText += fullPrice.ToString();
+            fullPriceText += " рублей";
+
+            return fullPriceText;
         }
 
         private void BVisitAppoiment_MouseDown(object sender, MouseButtonEventArgs e)
