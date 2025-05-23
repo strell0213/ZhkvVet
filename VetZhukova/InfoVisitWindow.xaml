@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VetZhukova"
         mc:Ignorable="d"
-        Title="Детали записи" Height="610" Width="400" Icon="/Image/pethealthicon.ico" WindowStartupLocation="CenterScreen">
+        Title="Детали записи" Height="630" Width="400" Icon="/Image/pethealthicon.ico" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -27,28 +27,74 @@
             <Grid>
                 <TextBlock x:Name="LTitle" Text="Оглавление" FontSize="18" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Top" Margin="0,5,0,0" Foreground="White"/>
 
-                <TextBlock  x:Name="LPatient" Text="Питомец" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,40,0,0" Foreground="White" FontWeight="Bold" FontSize="16"/>
+                <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,40,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Style="{DynamicResource TextBlockOpacity}" x:Name="LPatient" Text="Питомец" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontWeight="Bold" FontSize="16" MouseDown="LPatient_MouseDown"/>
+                    <TextBlock Grid.Column="1" Margin="10,0,0,0" Text="питомец" FontSize="16">
+                        <TextBlock.Foreground>
+                            <SolidColorBrush Color="White" Opacity="0.7"/>
+                        </TextBlock.Foreground></TextBlock>
+                </Grid>
                 <Line Stroke="White" X1="200" StrokeThickness="2" Margin="15,65,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <TextBlock x:Name="LOwner" Text="Владелец" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,70,0,0" Foreground="White" FontWeight="Bold" FontSize="16"/>
+
+                <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,70,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="LOwner" Text="Владелец" Foreground="White" FontWeight="Bold" FontSize="16"/>
+                    <TextBlock Grid.Column="1" Margin="10,0,0,0" Text="владелец" FontSize="16">
+                        <TextBlock.Foreground>
+                            <SolidColorBrush Color="White" Opacity="0.7"/>
+                        </TextBlock.Foreground></TextBlock>
+                </Grid>
+
                 <Line Stroke="White" X1="200" StrokeThickness="2" Margin="15,95,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <TextBlock x:Name="LEmployee" Text="Принимающий" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,100,0,0" Foreground="White" FontWeight="Bold" FontSize="16"/>
+
+                <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,100,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="LEmployee" Text="Принимающий" Foreground="White" FontWeight="Bold" FontSize="16"/>
+                    <TextBlock Grid.Column="1" Margin="10,0,0,0" Text="сотрудник" FontSize="16">
+                        <TextBlock.Foreground>
+                            <SolidColorBrush Color="White" Opacity="0.7"/>
+                        </TextBlock.Foreground></TextBlock>
+                </Grid>
+
                 <Line Stroke="White" X1="200" StrokeThickness="2" Margin="15,125,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <TextBlock x:Name="LService" Text="Услуга" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,130,0,0" Foreground="White" FontWeight="Bold" FontSize="16"/>
+                <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,130,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="LService" Text="Услуга" Foreground="White" FontWeight="Bold" FontSize="16"/>
+                    <TextBlock Grid.Column="1" Margin="10,0,0,0" Text="услуга" FontSize="16">
+                        <TextBlock.Foreground>
+                            <SolidColorBrush Color="White" Opacity="0.7"/>
+                        </TextBlock.Foreground></TextBlock>
+                </Grid>
+
                 <Line Stroke="White" X1="200" StrokeThickness="2" Margin="15,155,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                 <TextBox x:Name="TBNotes" Text="записка" TextWrapping="Wrap" VerticalAlignment="Top" Margin="15,160,15,0" Foreground="Black" FontWeight="Bold" FontSize="16" Height="150"/>
                 <Line Stroke="White" X1="250" StrokeThickness="2" Margin="15,320,0,0"/>
-
-                <Border x:Name="BDone" Style="{DynamicResource AnimBlockOpacity}" Background="#FFE5FFE3" Margin="15,340,15,0" VerticalAlignment="Top" Height="30" MouseDown="BDone_MouseDown">
+                <TextBlock x:Name="LStatus" Text="Статус" Foreground="White" FontWeight="Bold" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,322,0,0"/>
+                
+                <Border x:Name="BDone" Style="{DynamicResource AnimBlockOpacity}" Background="#FFE5FFE3" Margin="15,360,15,0" VerticalAlignment="Top" Height="30" MouseDown="BDone_MouseDown">
                     <TextBlock Foreground="#FF749094" FontWeight="Bold" FontSize="16" Text="Выполнить" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
                 </Border>
-                <Border x:Name="BVisitAppoiment" Style="{DynamicResource AnimBlockOpacity}" Background="White" Margin="15,375,15,0" VerticalAlignment="Top" Height="30" MouseDown="BVisitAppoiment_MouseDown">
+                <Border x:Name="BVisitAppoiment" Style="{DynamicResource AnimBlockOpacity}" Background="White" Margin="15,395,15,0" VerticalAlignment="Top" Height="30" MouseDown="BVisitAppoiment_MouseDown">
                     <TextBlock Foreground="#FF749094" FontWeight="Bold" FontSize="16" Text="Направить" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
                 </Border>
-                <Border x:Name="BAddMedication" Style="{DynamicResource AnimBlockOpacity}" Background="White" Margin="15,410,15,0"  VerticalAlignment="Top" Height="30">
+                <Border x:Name="BAddMedication" Style="{DynamicResource AnimBlockOpacity}" Background="White" Margin="15,430,15,0"  VerticalAlignment="Top" Height="30">
                     <TextBlock Foreground="#FF749094" FontWeight="Bold" FontSize="16" Text="Выписать лекарства" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
                 </Border>
 
-                <Border x:Name="BBack" Style="{DynamicResource AnimBlockOpacity}" Background="White" Margin="15,470,15,0" MouseDown="BBack_MouseDown" VerticalAlignment="Top" Height="30">
+                <Border x:Name="BBack" Style="{DynamicResource AnimBlockOpacity}" Background="White" Margin="15,490,15,0" MouseDown="BBack_MouseDown" VerticalAlignment="Top" Height="30">
                     <TextBlock Foreground="#FFE46565" FontWeight="Bold" FontSize="16" Text="Назад" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
                 </Border>
 

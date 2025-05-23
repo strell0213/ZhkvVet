@@ -61,6 +61,21 @@ namespace VetZhukova
             LEmployee.Text = _employee.fullName;
 
             TBNotes.Text = _visit.notes;
+
+            if(_visit.Status == 0 || _visit.Status == 1)
+            {
+                LStatus.Text = "В работе";
+                LStatus.Foreground = Brushes.Red;
+            }
+            else if(_visit.Status == 2)
+            {
+                BDone.Visibility = Visibility.Hidden;
+                BVisitAppoiment.Visibility = Visibility.Hidden;
+                BAddMedication.Visibility = Visibility.Hidden;
+
+                LStatus.Text = "Выполнено";
+                LStatus.Foreground = Brushes.Green;
+            }
         }
 
         private void BBack_MouseDown(object sender, MouseButtonEventArgs e)
@@ -104,6 +119,12 @@ namespace VetZhukova
                     Done();
                 }
             }
+        }
+
+        private void LPatient_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            PetWindow petWindow = new PetWindow(_patient);
+            petWindow.ShowDialog();
         }
     }
 }
