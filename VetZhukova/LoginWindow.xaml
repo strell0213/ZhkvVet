@@ -67,7 +67,7 @@
                                 </TextBox.Template>
                             </TextBox>
 
-                            <PasswordBox x:Name="TBPass" VerticalAlignment="Top" Margin="15,170,15,0" FontSize="20" Height="42" VerticalContentAlignment="Center" Padding="10,0,0,0" LostFocus="TBPass_LostFocus" GotFocus="TBPass_GotFocus" PasswordChanged="TBPass_PasswordChanged">
+                            <PasswordBox x:Name="TBPass" VerticalAlignment="Top" Margin="15,170,15,0" FontSize="20" Height="42" VerticalContentAlignment="Center" Padding="10,0,0,0" LostFocus="TBPass_LostFocus" GotFocus="TBPass_GotFocus" PasswordChanged="TBPass_PasswordChanged" KeyDown="TBPass_KeyDown">
                                 <PasswordBox.Template>
                                     <ControlTemplate>
                                         <Border BorderThickness="1" Background="#FFD9D9D9" CornerRadius="20">

@@ -95,6 +95,9 @@
     <Compile Include="PetWindow.xaml.cs">
       <DependentUpon>PetWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PrintEmployeeWindow.xaml.cs">
+      <DependentUpon>PrintEmployeeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ServiceFolder\AuthService.cs" />
     <Compile Include="ServiceFolder\EmployeeService.cs" />
     <Compile Include="ServiceFolder\OwnerService.cs" />
@@ -169,6 +172,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="PetWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PrintEmployeeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

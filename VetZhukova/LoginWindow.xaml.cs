@@ -205,5 +205,13 @@ namespace VetZhukova
         {
             turnPage(false);
         }
+
+        private void TBPass_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                BEnter_Click(null, null);
+            }
+        }
     }
 }

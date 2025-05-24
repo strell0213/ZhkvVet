@@ -1,6 +1,11 @@
-﻿using DocumentFormat.OpenXml.Packaging;
+﻿using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
+using VetZhukova.DB;
+using VetZhukova.ServiceFolder;
 using Text = DocumentFormat.OpenXml.Wordprocessing.Text;
 
 namespace VetZhukova.Word
@@ -8,35 +13,14 @@ namespace VetZhukova.Word
     public class WordHelper
     {
         private string _filePath;
+        private readonly PatientService _patientService;
+        private readonly ServiceService _serviceService;
 
         public WordHelper(string filePath)
         {
             _filePath = filePath;
-        }
-
-        public void CreateDocument(string title, string bodyText)
-        {
-            using (WordprocessingDocument wordDoc = WordprocessingDocument.Create(_filePath, DocumentFormat.OpenXml.WordprocessingDocumentType.Document))
-            {
-                // Создаем основной документ
-                //MainDocumentPart mainPart = wordDoc.AddMainDocumentPart();
-                //mainPart.Document = new Document();
-                //Body body = new Body();
-
-                //// Заголовок
-                //DocumentFormat.OpenXml.Drawing.Paragraph titleParagraph = CreateParagraph(title, bold: true, fontSize: "28");
-                //body.Append(titleParagraph);
-
-                //// Пробел
-                //body.Append(new DocumentFormat.OpenXml.Drawing.Paragraph(new DocumentFormat.OpenXml.Drawing.Run(new Text(" "))));
-
-                //// Основной текст
-                //DocumentFormat.OpenXml.Drawing.Paragraph bodyParagraph = CreateParagraph(bodyText, bold: false, fontSize: "24");
-                //body.Append(bodyParagraph);
-
-                //mainPart.Document.Append(body);
-                //mainPart.Document.Save();
-            }
+            _patientService = new PatientService();
+            _serviceService = new ServiceService();
         }
 
         public void CreateVisitDocument(
@@ -56,16 +40,141 @@ namespace VetZhukova.Word
 
                 body.Append(CreateParagraph("Информация о записи", bold: true, centered: true, size: "28"));
 
-                body.Append(CreateParagraph($"Пациент: {patientName}", color: "AA0000"));
-                body.Append(CreateParagraph($"Владелец питомца: {ownerName}", color: "AA0000"));
-                body.Append(CreateParagraph($"Принимающий: {employeeName}", color: "AA0000"));
-                body.Append(CreateParagraph($"Услуга: {serviceName}", color: "AA0000"));
+                body.Append(CreateParagraph($"Пациент: {patientName}"));
+                body.Append(CreateParagraph($"Владелец питомца: {ownerName}"));
+                body.Append(CreateParagraph($"Принимающий: {employeeName}"));
+                body.Append(CreateParagraph($"Услуга: {serviceName}"));
                 body.Append(CreateParagraph("Комментарий:"));
                 body.Append(CreateParagraph(comment));
                 body.Append(CreateParagraph(""));
                 body.Append(CreateParagraph($"К оплате: {price}"));
                 body.Append(new Paragraph(new Run(new Text(""))));
                 body.Append(CreateParagraph("Подпись: __________________________", size: "22"));
+
+                mainPart.Document.Append(body);
+                mainPart.Document.Save();
+            }
+        }
+
+        public void CreateDoneVisitByEmp(List<Visit> visits)
+        {
+            using (WordprocessingDocument wordDoc = WordprocessingDocument.Create(
+                _filePath, DocumentFormat.OpenXml.WordprocessingDocumentType.Document))
+            {
+                var mainPart = wordDoc.AddMainDocumentPart();
+                mainPart.Document = new Document();
+                var body = new Body();
+
+                body.Append(CreateParagraph("Информация о выполненных записях", bold: true, centered: true, size: "28"));
+
+                int count=1;
+                foreach(var visit in visits)
+                {
+                    var patient = _patientService.GetPatientByID(visit.PatientID);
+
+                    string text="";
+                    text += count.ToString();
+                    text += ". ";
+                    text += $"№{visit.VisitID} - {visit.visitDate}: ";
+                    text += $"Пациент: {patient.name}. ";
+                    text += $"{visit.notes}";
+                    body.Append(CreateParagraph(text));
+                    body.Append(CreateParagraph(""));
+                    count++;
+                }
+
+                mainPart.Document.Append(body);
+                mainPart.Document.Save();
+            }
+        }
+
+        public void CreateServices(List<Service> services)
+        {
+            using (WordprocessingDocument wordDoc = WordprocessingDocument.Create(
+                _filePath, DocumentFormat.OpenXml.WordprocessingDocumentType.Document))
+            {
+                var mainPart = wordDoc.AddMainDocumentPart();
+                mainPart.Document = new Document();
+                var body = new Body();
+
+                body.Append(CreateParagraph("Информация об услугах", bold: true, centered: true, size: "28"));
+
+                int count = 1;
+                foreach (var service in services)
+                {
+                    string text = "";
+                    text += count.ToString();
+                    text += ". ";
+                    text += service.serviceName; text += ", ";
+                    text += $"Цена: {service.Price}. ";
+                    text += $"Описание: {service.description}";
+                    body.Append(CreateParagraph(text));
+                    body.Append(CreateParagraph(""));
+                    count++;
+                }
+
+                mainPart.Document.Append(body);
+                mainPart.Document.Save();
+            }
+        }
+
+        public void CreateConsumbles(List<Consumable> consumables)
+        {
+            using (WordprocessingDocument wordDoc = WordprocessingDocument.Create(
+                _filePath, DocumentFormat.OpenXml.WordprocessingDocumentType.Document))
+            {
+                var mainPart = wordDoc.AddMainDocumentPart();
+                mainPart.Document = new Document();
+                var body = new Body();
+
+                body.Append(CreateParagraph("Информация о расходных материалах", bold: true, centered: true, size: "28"));
+
+                int count = 1;
+                foreach (var consumable in consumables)
+                {
+                    string text = "";
+                    text += count.ToString();
+                    text += ". ";
+                    text += consumable.name; text += ", ";
+                    text += $"{consumable.Quantity} {consumable.unit}";
+                    body.Append(CreateParagraph(text));
+                    body.Append(CreateParagraph(""));
+                    count++;
+                }
+
+                mainPart.Document.Append(body);
+                mainPart.Document.Save();
+            }
+        }
+
+        public void CreateVisitPatient(List<Visit> visits)
+        {
+            using (WordprocessingDocument wordDoc = WordprocessingDocument.Create(
+                _filePath, DocumentFormat.OpenXml.WordprocessingDocumentType.Document))
+            {
+                var mainPart = wordDoc.AddMainDocumentPart();
+                mainPart.Document = new Document();
+                var body = new Body();
+
+                body.Append(CreateParagraph("История записей", bold: true, centered: true, size: "28"));
+
+                int count = 1;
+                foreach (var visit in visits)
+                {
+                    var patient = _patientService.GetPatientByID(visit.PatientID);
+                    var service = _serviceService.GetServiceByID(visit.ServiceID);
+
+                    string text = "";
+                    text += count.ToString();
+                    text += ". ";
+                    text += $"№{visit.VisitID} - {visit.visitDate}: ";
+                    text += $"Пациент: {patient.name}. ";
+                    text += $"Услуга: {service.serviceName}. ";
+                    text += $"{visit.notes}";
+                    body.Append(CreateParagraph(text));
+                    body.Append(CreateParagraph(""));
+                    count++;
+                }
 
                 mainPart.Document.Append(body);
                 mainPart.Document.Save();

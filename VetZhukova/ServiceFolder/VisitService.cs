@@ -109,6 +109,45 @@ namespace VetZhukova
             return listVisit;
         }
 
+        public List<VisitDTO> GetDoneVisitDTOByPatient(int id)
+        {
+            var listVisit = App.AC.Visits
+                .AsEnumerable()
+                .Where(v => v.Status == 2 && v.PatientID == id)
+                .Join(App.AC.Services, v => v.ServiceID, s => s.ServiceID, (v, s) => new { v, s })
+                .Join(App.AC.Patients, vs => vs.v.PatientID, p => p.PatientID, (vs, p) => new { vs, p })
+                .Join(App.AC.Employees, vsp => vsp.vs.v.EmployeeID, e => e.EmployeeID, (vsp, e) => new
+                {
+                    VisitDate = vsp.vs.v.visitDate,
+                    ServiceName = vsp.vs.s.serviceName,
+                    PatientName = vsp.p.name,
+                    EmployeeName = e.fullName,
+                    VisitID = vsp.vs.v.VisitID
+                })
+                .ToList()
+                .OrderBy(x => DateTime.Parse(x.VisitDate))
+                .Select(v => new VisitDTO
+                {
+                    VisitDate = v.VisitDate,
+                    ServiceName = v.ServiceName,
+                    PatientName = v.PatientName,
+                    EmployeeName = v.EmployeeName,
+                    VisitID = v.VisitID
+                })
+                .ToList();
+
+            return listVisit;
+        }
+
+        public List<Visit> GetDoneVisitByPatient(int id)
+        {
+            var listVisit = App.AC.Visits
+                .Where(v => v.Status == 2 && v.PatientID == id)
+                .ToList();
+
+            return listVisit;
+        }
+
         public Visit GetVisitByID(int id)
         {
             return App.AC.Visits.Where(c => c.VisitID == id).FirstOrDefault();
@@ -151,6 +190,11 @@ namespace VetZhukova
             visit.Status = 2;
 
             App.AC.SaveChanges();
+        }
+
+        public List<Visit> GetDoneVisitByEmp(int employeeID)
+        {
+            return App.AC.Visits.Where(c => c.EmployeeID == employeeID && c.Status == 2).ToList();
         }
     }
 }

@@ -5,8 +5,70 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VetZhukova"
         mc:Ignorable="d"
-        Title="AddPatientWindow" Height="450" Width="800">
+        Title="Добавление питомца" Height="450" Width="500" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/Styles.xaml"/>
+                <ResourceDictionary Source="/Styles/ItemsControlStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.Background>
+            <ImageBrush ImageSource="/Image/окно регистрации фон.jpg"/>
+        </Grid.Background>
+        <Grid Grid.Row="0">
+            <Grid.Background>
+                <SolidColorBrush Color="White" Opacity="0.7"/>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"></RowDefinition>
+                <RowDefinition Height="5*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <GroupBox Header="Питомец">
+                    <Grid>
+                        <Grid x:Name="GAddPatient" Visibility="Visible">
+                            <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,10,0,0" Content="Наименование"></Label>
+                            <TextBox x:Name="TBNamePatient" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,40,0,0" Width="200" Height="24"></TextBox>
+                            <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,60,0,0" Content="Порода"></Label>
+                            <TextBox x:Name="TBBreed" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,90,0,0" Width="200" Height="24"></TextBox>
+                        </Grid>
+                        <Grid x:Name="GChoosePatient" Visibility="Hidden">
+                            <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,30,0,0" Content="Питомец"></Label>
+                            <ComboBox x:Name="CBChoosePatient" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,65,0,0" Width="250"></ComboBox>
+                        </Grid>
+                    </Grid>
+                </GroupBox>
+            </Grid>
+            <Grid Grid.Row="1">
+                <GroupBox Header="Владелец">
+                    <Grid>
+                        <CheckBox x:Name="CBHaveOwner" Margin="5,10,0,0" Content="Указать существующего владельца" HorizontalAlignment="Left" VerticalAlignment="Top" Click="CBHaveOwner_Click"></CheckBox>
+                        <Grid x:Name="GAddOwner" Visibility="Visible">
+                            <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,30,0,0" Content="ФИО"></Label>
+                            <TextBox x:Name="TBFIOOwner" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,60,0,0" Width="200" Height="24"></TextBox>
+                            <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,90,0,0" Content="Номер телефона"></Label>
+                            <TextBox x:Name="TBPhone" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,120,0,0" Width="200" Height="24"></TextBox>
+                            <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="215,30,0,0" Content="Логин"></Label>
+                            <TextBox x:Name="TBLogin" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="215,60,0,0" Width="200" Height="24"></TextBox>
+                            <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="215,90,0,0" Content="Номер телефона"></Label>
+                            <PasswordBox x:Name="PBPass" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="215,120,0,0" Width="200" Height="24"></PasswordBox>
+                        </Grid>
+                        <Grid x:Name="GChooseOwner" Visibility="Hidden">
+                            <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,30,0,0" Content="Пациент"></Label>
+                            <ComboBox x:Name="CBChooseOwner" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,65,0,0" Width="250"></ComboBox>
+                        </Grid>
+                    </Grid>
+                </GroupBox>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Border x:Name="BOk" Style="{DynamicResource AnimBlockOpacity}" Background="#FF749094" Margin="0,5,15,0" VerticalAlignment="Top" Height="30" MouseDown="BOk_MouseDown" HorizontalAlignment="Right" Width="100">
+                    <TextBlock Foreground="White" FontWeight="Bold" FontSize="16" Text="Добавить" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                </Border>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

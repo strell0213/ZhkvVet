@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using VetZhukova.DB;
 using VetZhukova.ServiceFolder;
+using VetZhukova.Word;
 
 namespace VetZhukova
 {
@@ -307,6 +310,14 @@ namespace VetZhukova
                     UpdateConsumable();
                 }
             }
+            else if (TCBooks.SelectedIndex==2)
+            {
+                AddPatientWindow add = new AddPatientWindow();
+                if(add.ShowDialog() == true)
+                {
+                    UpdatePatients();
+                }
+            }
         }
 
         private void BEditService_MouseDown(object sender, MouseButtonEventArgs e)
@@ -408,6 +419,78 @@ namespace VetZhukova
 
             PetWindow petWindow = new PetWindow(patient);
             petWindow.ShowDialog();
+        }
+
+        private void BPrintEmployee_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            PrintEmployeeWindow printEmployeeWindow = new PrintEmployeeWindow();
+            printEmployeeWindow.ShowDialog();
+        }
+
+        private void BPrintList_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (TCBooks.SelectedIndex == 0)
+            {
+                PrintServices();
+            }
+            else if (TCBooks.SelectedIndex == 1)
+            {
+                PrintConsumbles();
+            }
+        }
+
+        private void PrintConsumbles()
+        {
+            var listMat = _consumableService.GetConsumables();
+            if (listMat.Count == 0)
+            {
+                MessageBox.Show("Нет данных для печати!", GlobalSettings.NameApplication, MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            var saveFileDialog = new SaveFileDialog
+            {
+                Title = "Сохранить документ",
+                Filter = "Word документ (*.docx)|*.docx",
+                FileName = $"ConsumableList_{DateTime.Now:yyyyMMdd_HHmm}.docx",
+                DefaultExt = ".docx"
+            };
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                var builder = new WordHelper(saveFileDialog.FileName);
+                builder.CreateConsumbles(listMat);
+
+                MessageBox.Show("Документ успешно сохранён!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                System.Diagnostics.Process.Start("explorer", saveFileDialog.FileName);
+            }
+        }
+
+        private void PrintServices()
+        {
+            var listService = _serviceService.GetServices();
+            if (listService.Count == 0)
+            {
+                MessageBox.Show("Нет данных для печати!", GlobalSettings.NameApplication, MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            var saveFileDialog = new SaveFileDialog
+            {
+                Title = "Сохранить документ",
+                Filter = "Word документ (*.docx)|*.docx",
+                FileName = $"ServiceList_{DateTime.Now:yyyyMMdd_HHmm}.docx",
+                DefaultExt = ".docx"
+            };
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                var builder = new WordHelper(saveFileDialog.FileName);
+                builder.CreateServices(listService);
+
+                MessageBox.Show("Документ успешно сохранён!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                System.Diagnostics.Process.Start("explorer", saveFileDialog.FileName);
+            }
         }
     }
 }

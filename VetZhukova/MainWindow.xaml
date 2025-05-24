@@ -243,6 +243,9 @@
                                         <Border x:Name="BAddSerAndCons" Background="#FF749094" Style="{DynamicResource AnimBlockOpacity}" MouseDown="BAddSerAndCons_MouseDown" VerticalAlignment="Top" Margin="3,5,3,0">
                                             <TextBlock Foreground="White" FontWeight="Bold" FontSize="16" Text="Добавить" VerticalAlignment="Center" TextWrapping="Wrap" Margin="5,10,5,10" HorizontalAlignment="Center"/>
                                         </Border>
+                                        <Border x:Name="BPrintList" Background="#FF749094" Style="{DynamicResource AnimBlockOpacity}" MouseDown="BPrintList_MouseDown" VerticalAlignment="Top" Margin="3,50,3,0">
+                                            <TextBlock Foreground="White" FontWeight="Bold" FontSize="16" Text="Печать позиций" VerticalAlignment="Center" TextWrapping="Wrap" Margin="5,10,5,10" HorizontalAlignment="Center"/>
+                                        </Border>
                                     </Grid>
                                 </Border>
                             </Border>
@@ -393,6 +396,9 @@
                                     </Grid>
                                     <Border x:Name="BSaveEmployee" Grid.Column="1" Style="{DynamicResource AnimBlockOpacity}" Background="#FF749094" MouseDown="BWritePatientMain_MouseDown" VerticalAlignment="Top" Margin="20,240,10,0" Height="30">
                                         <TextBlock Foreground="White" FontSize="20" Text="Редактировать" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                                    </Border>
+                                    <Border x:Name="BPrintEmployee" Grid.Column="1" Style="{DynamicResource AnimBlockOpacity}" Background="#FF749094" MouseDown="BPrintEmployee_MouseDown" VerticalAlignment="Top" Margin="20,275,10,0" Height="30">
+                                        <TextBlock Foreground="White" FontSize="20" Text="Печать документов" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
                                     </Border>
                                 </Grid>
                                 <Grid Grid.Column="1">

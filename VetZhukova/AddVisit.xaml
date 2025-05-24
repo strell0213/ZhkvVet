@@ -46,7 +46,7 @@
                     <ColumnDefinition Width="1.5*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
-                    <GroupBox Header="Питомец пациента">
+                    <GroupBox Header="Питомец">
                         <Grid>
                             <CheckBox x:Name="CBHavePatient" Margin="5,10,0,0" Content="Указать существующего питомца" IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Top" Click="CBHavePatient_Click"></CheckBox>
                             <Grid x:Name="GAddPatient" Visibility="Visible">
@@ -63,9 +63,9 @@
                     </GroupBox>
                 </Grid>
                 <Grid Grid.Column="1">
-                    <GroupBox Header="Пациент">
+                    <GroupBox Header="Владелец">
                         <Grid>
-                            <CheckBox x:Name="CBHaveOwner" Margin="5,10,0,0" Content="Указать существующего пациента" HorizontalAlignment="Left" VerticalAlignment="Top" Click="CBHaveOwner_Click"></CheckBox>
+                            <CheckBox x:Name="CBHaveOwner" Margin="5,10,0,0" Content="Указать существующего владельца" HorizontalAlignment="Left" VerticalAlignment="Top" Click="CBHaveOwner_Click"></CheckBox>
                             <Grid x:Name="GAddOwner" Visibility="Visible">
                                 <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,30,0,0" Content="ФИО"></Label>
                                 <TextBox x:Name="TBFIOOwner" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,60,0,0" Width="200" Height="24"></TextBox>

@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using DocumentFormat.OpenXml.Office2010.Excel;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using VetZhukova.DB;
 using VetZhukova.ServiceFolder;
+using VetZhukova.Word;
 
 namespace VetZhukova
 {
@@ -47,7 +49,7 @@ namespace VetZhukova
 
         public void UpdateDoneList()
         {
-            var list = _visitService.GetDoneVisitPatient();
+            var list = _visitService.GetDoneVisitDTOByPatient(_patient.PatientID);
             LBDoneVisit.ItemsSource = list;
         }
 
@@ -117,6 +119,33 @@ namespace VetZhukova
             _patient.imagePath = openFileDialog.FileName;
             _patientService.UpdateImage(_patient);
             UpdateImage();
+        }
+
+        private void BPrint_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var list = _visitService.GetDoneVisitByPatient(_patient.PatientID);
+            if (list.Count == 0)
+            {
+                MessageBox.Show("Нет данных для печати!", GlobalSettings.NameApplication, MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            var saveFileDialog = new SaveFileDialog
+            {
+                Title = "Сохранить документ",
+                Filter = "Word документ (*.docx)|*.docx",
+                FileName = $"VisitDonePet_{DateTime.Now:yyyyMMdd_HHmm}.docx",
+                DefaultExt = ".docx"
+            };
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                var builder = new WordHelper(saveFileDialog.FileName);
+                builder.CreateVisitPatient(list);
+
+                MessageBox.Show("Документ успешно сохранён!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                System.Diagnostics.Process.Start("explorer", saveFileDialog.FileName);
+            }
         }
     }
 }

@@ -70,7 +70,7 @@
                                             <SolidColorBrush Color="#FF748F96"/>
                                         </Border.Background>
                                         <Grid>
-                                            <Label x:Name="LVisitDate" Content="{Binding Date, StringFormat=Дата записи: {0}}" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
+                                            <Label x:Name="LVisitDate" Content="{Binding VisitDate, StringFormat=Дата записи: {0}}" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
                                             <Label x:Name="LServiceName" Content="{Binding ServiceName, StringFormat=Услуга: {0}}" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,20,0,0"></Label>
                                             <Label x:Name="LEmployeeName" Content="{Binding EmployeeName, StringFormat=Выполнено сотрудником: {0}}" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,40,0,0"></Label>
                                         </Grid>
@@ -88,6 +88,9 @@
             </Grid.Background>
             <Border x:Name="BOk" Style="{DynamicResource AnimBlockOpacity}" Background="#FF749094" Margin="0,5,15,0" VerticalAlignment="Top" Height="30" MouseDown="BOk_MouseDown" HorizontalAlignment="Right" Width="70">
                 <TextBlock Foreground="White" FontWeight="Bold" FontSize="16" Text="Ок" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
+            </Border>
+            <Border x:Name="BPrint" Style="{DynamicResource AnimBlockOpacity}" Background="#FF749094" Margin="15,5,0,0" VerticalAlignment="Top" Height="30" MouseDown="BPrint_MouseDown" HorizontalAlignment="Left" Width="210">
+                <TextBlock Foreground="White" FontWeight="Bold" FontSize="16" Text="Печать истории записей" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
             </Border>
         </Grid>
     </Grid>
