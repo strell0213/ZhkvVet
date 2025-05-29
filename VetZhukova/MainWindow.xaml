@@ -375,11 +375,12 @@
                                     </Grid.ColumnDefinitions>
                                     <Grid Grid.Column="0">
                                         <Label Content="Имя:" FontSize="22" Foreground="White" VerticalAlignment="Bottom" Margin="0,0,0,5" HorizontalAlignment="Left"></Label>
-                                        <Label x:Name="LFullName" Content="Нет данных" FontSize="22" Foreground="White" VerticalAlignment="Bottom" Margin="65,0,0,5" HorizontalAlignment="Left" FontWeight="Bold"></Label>
+                                        <Label x:Name="LFullName" Content="Нет данных" FontSize="16" Foreground="White" VerticalAlignment="Bottom" Margin="65,0,0,8" HorizontalAlignment="Left" FontWeight="Bold"></Label>
+                                        <TextBox x:Name="TBEditFullName" VerticalAlignment="Bottom" Margin="65,0,0,8" HorizontalAlignment="Left" FontWeight="Bold" Height="30" Width="200" Visibility="Hidden"></TextBox>
                                     </Grid>
                                     <Grid Grid.Column="1">
                                         <Label Content="Должность:" FontSize="22" Foreground="White" VerticalAlignment="Bottom" Margin="0,0,0,5" HorizontalAlignment="Left"></Label>
-                                        <Label x:Name="LPosition" Content="Нет данных" FontSize="22" Foreground="White" VerticalAlignment="Bottom" Margin="130,0,0,5" HorizontalAlignment="Left" FontWeight="Bold"></Label>
+                                        <Label x:Name="LPosition" Content="Нет данных" FontSize="16" Foreground="White" VerticalAlignment="Bottom" Margin="130,0,0,8" HorizontalAlignment="Left" FontWeight="Bold"></Label>
                                     </Grid>
                                 </Grid>
                             </Grid>
@@ -389,13 +390,16 @@
                                     <ColumnDefinition Width="2.5*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <Grid Grid.Column="0">
-                                    <Grid Background="#FF748F96" VerticalAlignment="Top" Margin="20,5,10,0" Height="223">
-                                        <Image Margin="5,5,5,5" Source="/Image/окно регистрации фон.jpg" Stretch="UniformToFill">
+                                    <Grid Background="#FF748F96" Margin="20,5,5,0" Height="223" VerticalAlignment="Top" Width="223">
+                                        <Image x:Name="ImPhoto" Margin="5,5,5,5" Source="/Image/окно регистрации фон.jpg" Stretch="UniformToFill" MouseDown="Image_MouseDown">
                                             
                                         </Image>
                                     </Grid>
-                                    <Border x:Name="BSaveEmployee" Grid.Column="1" Style="{DynamicResource AnimBlockOpacity}" Background="#FF749094" MouseDown="BWritePatientMain_MouseDown" VerticalAlignment="Top" Margin="20,240,10,0" Height="30">
+                                    <Border x:Name="BEditEmployee" Grid.Column="1" Style="{DynamicResource AnimBlockOpacity}" Background="#FF749094" MouseDown="BEditEmployee_MouseDown" VerticalAlignment="Top" Margin="20,240,10,0" Height="30">
                                         <TextBlock Foreground="White" FontSize="20" Text="Редактировать" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                                    </Border>
+                                    <Border x:Name="BSaveEmployee" Grid.Column="1" Style="{DynamicResource AnimBlockOpacity}" Background="#FF749094" MouseDown="BSaveEmployee_MouseDown" VerticalAlignment="Top" Margin="20,240,10,0" Height="30" Visibility="Hidden">
+                                        <TextBlock Foreground="White" FontSize="20" Text="Сохранить" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
                                     </Border>
                                     <Border x:Name="BPrintEmployee" Grid.Column="1" Style="{DynamicResource AnimBlockOpacity}" Background="#FF749094" MouseDown="BPrintEmployee_MouseDown" VerticalAlignment="Top" Margin="20,275,10,0" Height="30">
                                         <TextBlock Foreground="White" FontSize="20" Text="Печать документов" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
@@ -416,11 +420,13 @@
                                     <Grid x:Name="grid2" Grid.Row="1">
                                         <Label HorizontalAlignment="Left" Content="Номер телефона:" FontSize="22" VerticalAlignment="Center"/>
                                         <Label x:Name="LPhone" Content="Нет данных" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="190,0,0,0" FontWeight="Bold"></Label>
+                                        <TextBox x:Name="TBEditPhone" VerticalAlignment="Bottom" Margin="190,0,0,9" HorizontalAlignment="Left" FontWeight="Bold" Height="30" Width="200" Visibility="Hidden"></TextBox>
                                         <Line Stroke="Black" VerticalAlignment="Bottom" X2="{Binding Width, ElementName=grid2, FallbackValue=634}"/>
                                     </Grid>
                                     <Grid x:Name="grid3" Grid.Row="2">
                                         <Label HorizontalAlignment="Left" Content="E-Mail:" FontSize="22" VerticalAlignment="Center"/>
                                         <Label x:Name="LEmail" Content="Нет данных" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="93,0,0,0" FontWeight="Bold"></Label>
+                                        <TextBox x:Name="TBEditEmail" VerticalAlignment="Bottom" Margin="93,0,0,9" HorizontalAlignment="Left" FontWeight="Bold" Height="30" Width="200" Visibility="Hidden"></TextBox>
                                         <Line Stroke="Black" VerticalAlignment="Bottom" X2="{Binding Width, ElementName=grid3, FallbackValue=634}"/>
                                     </Grid>
                                 </Grid>

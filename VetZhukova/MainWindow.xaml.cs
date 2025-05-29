@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -99,6 +100,29 @@ namespace VetZhukova
             LExpDate.Content = _employeeService.GetStazhWork(employee);
             LPhone.Content = employee.phone;
             LEmail.Content = employee.email;
+
+            UpdateImageEmployee(employee);
+        }
+
+        public void UpdateImageEmployee(Employee employee)
+        {
+            string appPath = AppDomain.CurrentDomain.BaseDirectory;
+            string targetFolder = System.IO.Path.Combine(appPath, "Patient");
+
+            if (!Directory.Exists(targetFolder)) return;
+            if (employee.imPhoto is null) return;
+
+            string imagePath = System.IO.Path.Combine(targetFolder, employee.imPhoto);
+            if (File.Exists(imagePath))
+            {
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri(imagePath, UriKind.Absolute);
+                bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                bitmap.EndInit();
+
+                ImPhoto.Source = bitmap;
+            }
         }
 
         private void GHeaderBlock1_MouseEnter(object sender, MouseEventArgs e)
@@ -491,6 +515,76 @@ namespace VetZhukova
                 MessageBox.Show("Документ успешно сохранён!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                 System.Diagnostics.Process.Start("explorer", saveFileDialog.FileName);
             }
+        }
+
+        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton != MouseButton.Right) return;
+
+            var employee = _employeeService.GetEmployeeByID(GlobalSettings.IDUser);
+
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Title = "Выберите фото пациента",
+                Filter = "Image files (*.jpg;*.jpeg;*.png)|*.jpg;*.jpeg;*.png"
+            };
+
+            if (openFileDialog.ShowDialog() == false) return;
+
+            string appPath = AppDomain.CurrentDomain.BaseDirectory;
+            string targetFolder = System.IO.Path.Combine(appPath, "Patient");
+
+            if (!Directory.Exists(targetFolder))
+                Directory.CreateDirectory(targetFolder);
+
+            string fileExt = System.IO.Path.GetExtension(openFileDialog.FileName); // ".jpg"(openFileDialog.FileName);
+            string fileName = $"Emp{employee.EmployeeID.ToString()}{fileExt}";
+            targetFolder = System.IO.Path.Combine(targetFolder, fileName);
+
+            File.Copy(openFileDialog.FileName, targetFolder, overwrite: true);
+
+            employee.imPhoto = openFileDialog.FileName;
+            _employeeService.UpdateImage(employee);
+            UpdateImageEmployee(employee);
+        }
+
+        private void BEditEmployee_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            BEditEmployee.Visibility = Visibility.Hidden;
+            LFullName.Visibility = Visibility.Hidden;
+            LPhone.Visibility = Visibility.Hidden;
+            LEmail.Visibility = Visibility.Hidden;
+
+            TBEditFullName.Text = LFullName.Content.ToString();
+            TBEditPhone.Text = LPhone.Content.ToString();
+            TBEditEmail.Text = LEmail.Content.ToString();
+
+            TBEditFullName.Visibility = Visibility.Visible;
+            TBEditPhone.Visibility = Visibility.Visible;
+            TBEditEmail.Visibility = Visibility.Visible;
+            BSaveEmployee.Visibility = Visibility.Visible;
+        }
+
+        private void BSaveEmployee_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            BSaveEmployee.Visibility = Visibility.Hidden;
+            TBEditFullName.Visibility = Visibility.Hidden;
+            TBEditPhone.Visibility = Visibility.Hidden;
+            TBEditEmail.Visibility = Visibility.Hidden;
+
+            var employee = _employeeService.GetEmployeeByID(GlobalSettings.IDUser);
+
+            employee.fullName = TBEditFullName.Text;
+            employee.phone = TBEditPhone.Text;
+            employee.email = TBEditEmail.Text;
+
+            App.AC.SaveChanges();
+            GetInfoEmployee();
+
+            LFullName.Visibility = Visibility.Visible;
+            LPhone.Visibility = Visibility.Visible;
+            LEmail.Visibility = Visibility.Visible;
+            BEditEmployee.Visibility = Visibility.Visible;
         }
     }
 }

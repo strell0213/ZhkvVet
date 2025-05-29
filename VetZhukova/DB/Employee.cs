@@ -9,7 +9,7 @@ namespace VetZhukova.DB
     public class Employee
     {
         public int EmployeeID { get; set; }
-        private string FullName="", Position="", HireDate = "", Phone = "", Email = "", Login = "", Password = "";
+        private string FullName="", Position="", HireDate = "", Phone = "", Email = "", Login = "", Password = "", ImPhoto="";
 
         public string fullName { get { return FullName; } set { FullName = value; } }
         public string position { get { return Position; } set { Position = value; } }
@@ -18,9 +18,10 @@ namespace VetZhukova.DB
         public string email { get { return Email; } set { Email = value; } }
         public string login { get { return Login; } set { Login = value; } }
         public string password { get { return Password; } set { Password = value; } }
+        public string imPhoto { get { return ImPhoto; } set { ImPhoto = value; } }
 
         public Employee() { }
-        public Employee(string FullName, string Position, string HireDate, string Phone, string Email, string Login, string Password)
+        public Employee(string FullName, string Position, string HireDate, string Phone, string Email, string Login, string Password, string ImPhoto)
         {
             this.FullName = FullName;
             this.Position = Position;
@@ -29,6 +30,7 @@ namespace VetZhukova.DB
             this.Email = Email;
             this.Login = Login;
             this.Password = Password;
+            this.ImPhoto = ImPhoto;
         }
     }
 }

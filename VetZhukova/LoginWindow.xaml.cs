@@ -32,9 +32,19 @@ namespace VetZhukova
 
         private void BEnter_Click(object sender, RoutedEventArgs e)
         {
-            if (_auth.Autorize(TBLogin.Text, TBPass.Password) == true)
+            if (TBLogin.Text == "admin" && TBPass.Password == "admin")
             {
-                this.DialogResult = true;
+                AdminWindow adminWindow = new AdminWindow();
+                adminWindow.Show();
+                this.Close();
+
+            }
+            else
+            {
+                if (_auth.Autorize(TBLogin.Text, TBPass.Password) == true)
+                {
+                    this.DialogResult = true;
+                }
             }
         }
 

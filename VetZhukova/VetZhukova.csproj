@@ -83,8 +83,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddEmployeeWindow.xaml.cs">
+      <DependentUpon>AddEmployeeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddPatientWindow.xaml.cs">
       <DependentUpon>AddPatientWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdminWindow.xaml.cs">
+      <DependentUpon>AdminWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ConsumableWindow.xaml.cs">
       <DependentUpon>ConsumableWindow.xaml</DependentUpon>
@@ -106,6 +112,10 @@
     <Compile Include="ServiceFolder\ServiceService.cs" />
     <Compile Include="ServiceFolder\VisitService.cs" />
     <Compile Include="Word\WordHelper.cs" />
+    <Page Include="AddEmployeeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddlConsumableWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -119,6 +129,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddVisit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

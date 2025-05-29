@@ -1,0 +1,18 @@
+﻿<Window x:Class="VetZhukova.AddEmployeeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VetZhukova"
+        mc:Ignorable="d"
+        Title="AddEmployeeWindow" Height="400" Width="400">
+    <Grid>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,20,0,0" Content="Логин" FontSize="22" FontWeight="Bold"></Label>
+        <TextBox x:Name="TBLogin" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,70,0,0" FontSize="18" Height="30" Text="" Width="300"></TextBox>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,120,0,0" Content="Пароль" FontSize="22" FontWeight="Bold"></Label>
+        <TextBox x:Name="TBPass" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,170,0,0" FontSize="18" Height="30" Text="" Width="300"></TextBox>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,220,0,0" Content="Должность" FontSize="22" FontWeight="Bold"></Label>
+        <ComboBox x:Name="CBRole" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,270,0,0" FontSize="18" Height="30" Text="" Width="300"></ComboBox>
+        <Button x:Name="BAdd" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,320,0,0" FontSize="18" Height="30" Width="300" Content="Добавить" Click="BAdd_Click"></Button>
+    </Grid>
+</Window>

@@ -46,5 +46,27 @@ namespace VetZhukova.ServiceFolder
 
             return $"{years} лет, {months} мес.";
         }
+
+        public bool UpdateImage(Employee curEmp)
+        {
+            var EmpDB = App.AC.Employees.Where(c => c.EmployeeID == curEmp.EmployeeID).FirstOrDefault();
+            if (EmpDB is null) return false;
+
+            EmpDB.imPhoto = EmpDB.imPhoto;
+            App.AC.SaveChanges();
+            return true;
+        }
+
+        public void AddEmployee(string login, string role, string pass)
+        {
+            Employee employee = new Employee() { 
+                login = login,
+                position = role,
+                password = pass
+            };
+
+            App.AC.Employees.Add(employee);
+            App.AC.SaveChanges();
+        }
     }
 }
