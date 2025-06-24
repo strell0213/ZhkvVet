@@ -83,14 +83,20 @@
                 <TextBox x:Name="TBNotes" Text="записка" TextWrapping="Wrap" VerticalAlignment="Top" Margin="15,160,15,0" Foreground="Black" FontWeight="Bold" FontSize="16" Height="150"/>
                 <Line Stroke="White" X1="250" StrokeThickness="2" Margin="15,320,0,0"/>
                 <TextBlock x:Name="LStatus" Text="Статус" Foreground="White" FontWeight="Bold" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,322,0,0"/>
-                
+
                 <Border x:Name="BDone" Style="{DynamicResource AnimBlockOpacity}" Background="#FFE5FFE3" Margin="15,360,15,0" VerticalAlignment="Top" Height="30" MouseDown="BDone_MouseDown">
                     <TextBlock Foreground="#FF749094" FontWeight="Bold" FontSize="16" Text="Выполнить" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
                 </Border>
-                <Border x:Name="BVisitAppoiment" Style="{DynamicResource AnimBlockOpacity}" Background="White" Margin="15,395,15,0" VerticalAlignment="Top" Height="30" MouseDown="BVisitAppoiment_MouseDown">
+                <Border x:Name="BVisitAppoiment" Style="{DynamicResource AnimBlockOpacity}" Margin="15,395,15,0" VerticalAlignment="Top" Height="30" MouseDown="BVisitAppoiment_MouseDown">
+                    <Border.Background>
+                        <SolidColorBrush Color="White" Opacity="0.6"/>
+                    </Border.Background>
                     <TextBlock Foreground="#FF749094" FontWeight="Bold" FontSize="16" Text="Направить" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
                 </Border>
-                <Border x:Name="BAddMedication" Style="{DynamicResource AnimBlockOpacity}" Background="White" Margin="15,430,15,0"  VerticalAlignment="Top" Height="30">
+                <Border x:Name="BAddMedication" Style="{DynamicResource AnimBlockOpacity}" Margin="15,430,15,0"  VerticalAlignment="Top" Height="30">
+                    <Border.Background>
+                        <SolidColorBrush Color="White" Opacity="0.6"/>
+                    </Border.Background>
                     <TextBlock Foreground="#FF749094" FontWeight="Bold" FontSize="16" Text="Выписать лекарства" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
                 </Border>
 
